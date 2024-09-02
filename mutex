@@ -1,0 +1,31 @@
+import threading
+
+shared_variable = 0
+
+def increment_shared_variable():
+    global shared_variable
+    for _ in range(1000000):
+        #print("start")
+
+        try:
+            #print("ziskal som kluc")
+            shared_variable = shared_variable + 1
+            #raise Exception
+        finally:
+
+            #print("end")
+
+
+thread1 = threading.Thread(target=increment_shared_variable)
+thread2 = threading.Thread(target=increment_shared_variable)
+thread3 = threading.Thread(target=increment_shared_variable)
+
+
+thread1.start()
+thread2.start()
+thread3.start()
+
+
+thread1.join()
+thread2.join()
+thread3.join()
